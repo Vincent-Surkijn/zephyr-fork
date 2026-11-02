@@ -5,13 +5,20 @@
  */
 #define DT_DRV_COMPAT maxim_max31856
 
+#include <zephyr/kernel.h>
+#include <zephyr/drivers/sensor.h>
+#include <zephyr/init.h>
+#include <zephyr/drivers/gpio.h>
+#include <zephyr/sys/byteorder.h>
+#include <zephyr/sys/__assert.h>
+#include <zephyr/drivers/spi.h>
+#include <zephyr/logging/log.h>
+#include <zephyr/types.h>
+#include <zephyr/device.h>
+
 #if DT_NUM_INST_STATUS_OKAY(DT_DRV_COMPAT) == 0
 #warning "MAX31856 driver enabled without any devices"
 #endif
-
-#include <zephyr/drivers/spi.h>
-#include <zephyr/logging/log.h>
-#include <zephyr/device.h>
 
 LOG_MODULE_REGISTER(MAX31856, CONFIG_SENSOR_LOG_LEVEL);
 
@@ -25,12 +32,16 @@ struct max31856_data {
 
 static int max31856_sample_fetch(const struct device *dev, enum sensor_channel chan)
 {
+    LOG_INF("Fetching sample\n");
+
 	return 0;
 }
 
 static int max31856_channel_get(const struct device *dev, enum sensor_channel chan,
 				struct sensor_value *val)
 {
+    LOG_INF("Getting channel\n");
+
 	return 0;
 }
 
